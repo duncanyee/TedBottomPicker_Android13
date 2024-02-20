@@ -843,10 +843,15 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment {
         }
 
         public TedBottomSheetDialogFragment create() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
-                    && ContextCompat.checkSelfPermission(fragmentActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                throw new RuntimeException("Missing required WRITE_EXTERNAL_STORAGE permission. Did you remember to request it first?");
-            }
+            /**
+             *  Make sure that the correct permissions are set properly with projects consuming this library.
+             *  * WRITE_EXTERNAL_STORAGE for Android 12 and under
+             *  * READ_MEDIA_IMAGES and READ_MEDIA_VIDEO for Android 13+
+             **/
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
+//                    && ContextCompat.checkSelfPermission(fragmentActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                throw new RuntimeException("Missing required WRITE_EXTERNAL_STORAGE permission. Did you remember to request it first?");
+//            }
 
             if (onImageSelectedListener == null && onMultiImageSelectedListener == null) {
                 throw new RuntimeException("You have to use setOnImageSelectedListener() or setOnMultiImageSelectedListener() for receive selected Uri");
